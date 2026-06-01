@@ -110,16 +110,12 @@ async function checkLocalServer() {
 
 async function main() {
   let backendUrl = CLOUD_BACKEND_URL;
-  console.log(pc.green('\nConnecting to BurgerServer...'));
+  console.log('Connecting to BurgerServer...');
 
   try {
     const isLocalRunning = await checkLocalServer();
     if (isLocalRunning) {
       backendUrl = LOCAL_BACKEND_URL;
-      console.log(pc.yellow('🍔 Native BurgerServer backend detected! Routing request locally (no time limits).'));
-    } else {
-      console.log(pc.yellow('⚠️ Local BurgerServer backend not detected on port 3002. Fallback to Cloud Server...'));
-      console.log(pc.green('🌐 Routing request to cloud server...'));
     }
 
     const response = await postData(backendUrl, { prompt });
@@ -134,8 +130,6 @@ async function main() {
     if (!data.files || data.files.length === 0) {
       throw new Error('No files returned from the server.');
     }
-
-    console.log(pc.green(`\n✅ Code received! Creating project in folder: "${path.relative(process.cwd(), targetDir) || '.'}"...\n`));
 
     // Ensure the main target directory exists
     if (!fs.existsSync(targetDir)) {
@@ -153,7 +147,6 @@ async function main() {
       // Security check: Prevent path traversal
       const relative = path.relative(targetDir, filePath);
       if (relative.startsWith('..') || path.isAbsolute(relative)) {
-        console.warn(pc.yellow(`   ⚠️ Warning: Blocked path traversal attempt for: "${file.path}"`));
         continue;
       }
 
@@ -165,13 +158,12 @@ async function main() {
       }
 
       fs.writeFileSync(filePath, file.content || '', 'utf8');
-      console.log(`   📄 Created: ${pc.cyan(file.path)}`);
     }
 
-    console.log(pc.bold(pc.green(`\n🎉 BurgerScaffolding Ready in "${path.basename(targetDir)}"!`)));
+    console.log('Done');
 
   } catch (error) {
-    console.error(pc.red('\n❌ Error generating code:'), error.message);
+    console.error('Error:', error.message);
     process.exit(1);
   }
 }
