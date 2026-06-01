@@ -83,7 +83,7 @@ const targetDir = path.resolve(options.dir);
 
 // Backend server URLs
 const LOCAL_BACKEND_URL = 'http://localhost:3002/generate';
-const CLOUD_BACKEND_URL = 'https://bunserver.onrender.com/generate';
+const CLOUD_BACKEND_URL = 'https://bunserver-jsx6.onrender.com/generate';
 
 // Helper to quickly check if a local backend is running
 async function checkLocalServer() {
