@@ -1,0 +1,6 @@
+node_modules/
+bunserver-backend/.env
+.env
+.DS_Store
+.system_generated/
+*.log
