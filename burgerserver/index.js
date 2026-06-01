@@ -70,8 +70,8 @@ async function postData(url, data) {
 }
 
 program
-  .name('bunserver')
-  .description('Custom AI Code Scaffolding Tool for BunServer')
+  .name('burger')
+  .description('Custom AI Code Scaffolding Tool - Burger CLI')
   .version('1.0.0')
   .argument('<prompt>', 'The prompt describing what you want to create')
   .option('-d, --dir <directory>', 'Target directory to generate the files in', '.')
@@ -110,15 +110,15 @@ async function checkLocalServer() {
 
 async function main() {
   let backendUrl = CLOUD_BACKEND_URL;
-  console.log(pc.green('\nConnecting to BunServer...'));
+  console.log(pc.green('\nConnecting to BurgerServer...'));
 
   try {
     const isLocalRunning = await checkLocalServer();
     if (isLocalRunning) {
       backendUrl = LOCAL_BACKEND_URL;
-      console.log(pc.magenta('🍇 Native BunServer backend detected! Routing request locally (no time limits).'));
+      console.log(pc.yellow('🍔 Native BurgerServer backend detected! Routing request locally (no time limits).'));
     } else {
-      console.log(pc.yellow('⚠️ Local BunServer backend not detected on port 3002. Fallback to Cloud Server...'));
+      console.log(pc.yellow('⚠️ Local BurgerServer backend not detected on port 3002. Fallback to Cloud Server...'));
       console.log(pc.green('🌐 Routing request to cloud server...'));
     }
 
@@ -168,7 +168,7 @@ async function main() {
       console.log(`   📄 Created: ${pc.cyan(file.path)}`);
     }
 
-    console.log(pc.bold(pc.green(`\n🎉 BunScaffolding Ready in "${path.basename(targetDir)}"!`)));
+    console.log(pc.bold(pc.green(`\n🎉 BurgerScaffolding Ready in "${path.basename(targetDir)}"!`)));
 
   } catch (error) {
     console.error(pc.red('\n❌ Error generating code:'), error.message);

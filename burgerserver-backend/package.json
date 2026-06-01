@@ -1,7 +1,7 @@
 {
-  "name": "bunserver-backend",
+  "name": "burgerserver-backend",
   "version": "1.0.0",
-  "description": "BunServer Backend - Modern, high-performance scaffolding using Bun.serve",
+  "description": "BurgerServer Backend - Modern, high-performance scaffolding using Bun.serve with Node fallback",
   "main": "server.js",
   "type": "module",
   "scripts": {

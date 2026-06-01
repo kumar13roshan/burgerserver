@@ -1,9 +1,11 @@
 {
-  "name": "bunserver",
+  "name": "@kumar13roshan/burger",
   "version": "1.0.0",
-  "description": "Custom AI Code Scaffolding Tool for BunServer",
+  "description": "Custom AI Code Scaffolding Tool - Burger CLI",
   "main": "index.js",
-  "bin": "./index.js",
+  "bin": {
+    "burger": "./index.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

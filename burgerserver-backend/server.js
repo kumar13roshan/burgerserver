@@ -87,7 +87,7 @@ if (configuredKeys.length === 0) {
   console.error('❌ Error: No Gemini API keys are defined in the environment (e.g., GEMINI_API_KEY)!');
   process.exit(1);
 } else {
-  console.log(`🍇 ${isBun ? 'BunServer' : 'BunServer (Node-fallback)'} initialized with ${configuredKeys.length} API Key(s) in rotation.`);
+  console.log(`🍔 ${isBun ? 'BurgerServer' : 'BurgerServer (Node-fallback)'} initialized with ${configuredKeys.length} API Key(s) in rotation.`);
 }
 
 // Robust JSON parser and extractor for model responses
@@ -236,7 +236,7 @@ const welcomeHtml = `<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🍇 BunServer is Live!</title>
+  <title>🍔 BurgerServer is Live!</title>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -262,7 +262,7 @@ const welcomeHtml = `<!DOCTYPE html>
     h1 {
       font-size: 3rem;
       margin: 0 0 1rem 0;
-      background: linear-gradient(45deg, #a020f0, #ff007b);
+      background: linear-gradient(45deg, #ff7b00, #ff007b);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -272,13 +272,13 @@ const welcomeHtml = `<!DOCTYPE html>
       margin-bottom: 2rem;
     }
     .badge {
-      background-color: #a020f0;
+      background-color: #ff7b00;
       color: #fff;
       padding: 0.5rem 1.2rem;
       border-radius: 20px;
       font-weight: bold;
       display: inline-block;
-      box-shadow: 0 0 15px rgba(160, 32, 240, 0.5);
+      box-shadow: 0 0 15px rgba(255, 123, 0, 0.5);
     }
     .runtime-badge {
       margin-top: 1.5rem;
@@ -295,7 +295,7 @@ const welcomeHtml = `<!DOCTYPE html>
 </head>
 <body>
   <div class="container">
-    <h1>🍇 BunServer</h1>
+    <h1>🍔 BurgerServer</h1>
     <p>High-performance scaffolding engine built on native Bun.serve with Node fallback.</p>
     <div class="badge">Live & Scaffolding</div>
     <div class="runtime-badge">Running on: <strong>${isBun ? 'Bun' : 'NodeJS'}</strong></div>
@@ -365,7 +365,7 @@ if (isBun) {
     }
   });
 
-  console.log(`🚀 BunServer-backend running natively on Bun at http://localhost:${PORT}`);
+  console.log(`🚀 BurgerServer-backend running natively on Bun at http://localhost:${PORT}`);
 
 } else {
   // Node-Express fallback server
@@ -402,6 +402,6 @@ if (isBun) {
   });
 
   app.listen(PORT, () => {
-    console.log(`🚀 BunServer-backend running on Node fallback at http://localhost:${PORT}`);
+    console.log(`🚀 BurgerServer-backend running on Node fallback at http://localhost:${PORT}`);
   });
 }
