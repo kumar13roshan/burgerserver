@@ -125,20 +125,16 @@ function cleanAndParseJson(text) {
   }
 }
 
-// Check if error is key-specific (invalid key, rate limit, quota exceeded)
-function isKeyExhaustedOrInvalid(errorMessage) {
+// Check if error is key-specific (specifically invalid or unauthorized keys)
+function isKeyInvalid(errorMessage) {
   if (!errorMessage) return false;
   const msg = errorMessage.toLowerCase();
   return (
     msg.includes('api_key_invalid') ||
     msg.includes('api key not valid') ||
-    msg.includes('resource_exhausted') ||
-    msg.includes('quota') ||
-    msg.includes('limit') ||
-    msg.includes('429') ||
     msg.includes('unauthorized') ||
-    msg.includes('forbidden') ||
-    msg.includes('api key is invalid')
+    msg.includes('api key is invalid') ||
+    msg.includes('key invalid')
   );
 }
 
@@ -167,7 +163,7 @@ async function generateScaffolding(prompt) {
 
     console.log(`🔑 Trying API Key ${currentKeyIndex + 1}/${keys.length} (${maskedKey})`);
 
-    const modelsToTry = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-flash-latest'];
+    const modelsToTry = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash', 'gemini-flash-latest'];
     let skipKey = false;
 
     for (const modelName of modelsToTry) {
@@ -218,9 +214,10 @@ async function generateScaffolding(prompt) {
         console.error(`⚠️ Model ${modelName} failed with Key ${currentKeyIndex + 1}:`, errMsg);
         lastError = error;
 
-        // If the API Key itself is invalid, exhausted, or has quota issues, skip trying other models with this key!
-        if (isKeyExhaustedOrInvalid(errMsg)) {
-          console.warn(`🛑 Key ${currentKeyIndex + 1} is invalid, exhausted, or rate-limited. Skipping other models for this key.`);
+        // If the API Key itself is invalid, skip trying other models with this key.
+        // For rate limits, 503s, or model restrictions, continue trying other models.
+        if (isKeyInvalid(errMsg)) {
+          console.warn(`🛑 Key ${currentKeyIndex + 1} is invalid or unauthorized. Skipping other models for this key.`);
           skipKey = true;
         }
       }
